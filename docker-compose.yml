@@ -4,9 +4,8 @@ services:
   frontend:
     mem_limit: 128m
     cpus: 0.1
-
     restart: unless-stopped
-    image: #todo
+    image: registry.noseryoung.ch/noseryoung/pgfrontend:latest
     container_name: frontend
     depends_on:
       - backend
@@ -17,18 +16,15 @@ services:
     cpus: 0.2
 
     restart: unless-stopped
-    image: #todo
+    image: registry.noseryoung.ch/noseryoung/pgbackend:latest
     container_name: backend
     ports:
       - 8080:8080
-    environment:
-      -  #env
+    env_file:
+      -  .env
     depends_on:
       - db
   db:
-    mem_limit: 128m
-    cpus: 0.05
-
     restart: unless-stopped
     image: 'postgres:10-alpine'
     container_name: db

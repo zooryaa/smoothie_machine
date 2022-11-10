@@ -1,0 +1,52 @@
+image: node:16.13.0
+
+definitions:
+  services:
+    docker:
+      memory: 2048
+  steps:
+    - step: &sonarqube
+        name: SonarQube analysis
+        script:
+          - pipe: sonarsource/sonarqube-scan:1.1.0
+            variables:
+              SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
+              SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
+    - step: &build
+        script:
+          - yarn install
+          - yarn build
+        artifacts:
+          - build/**
+    - step: &dockerize
+        size: 2x
+        services:
+          - docker
+        script:
+          - export IMAGE_NAME=registry.noseryoung.ch/noseryoung/pgfrontend:latest
+          - docker build -t $IMAGE_NAME .
+          - docker push $IMAGE_NAME
+    - step: &restartcontainer
+        name: (Re-) Start containers
+        script:
+          # Restart Containers
+          - ssh -i ~/.ssh/config ci@internal.noseryoung.ch "/data/container/pg/restart.sh"
+
+  caches:
+    sonar: ~/.sonar
+
+clone:
+  depth: full
+
+pipelines:
+  branches:
+    "{main}": # or the name of your main branch
+      - step: *sonarqube
+    "{development}": # or the name of your main branch
+      - step: *sonarqube
+      - step: *build
+      - step: *dockerize
+      - step: *restartcontainer
+  pull-requests:
+    "**":
+      - step: *sonarqube

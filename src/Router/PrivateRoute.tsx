@@ -17,7 +17,7 @@ type JWTType = {
 
 const PrivateRoute: React.FC<Props> = ({
   element: RouteComponent,
-  authorities: authorities,
+  authorities,
 }) => {
   const activeUserContext = useContext(ActiveUserContext);
   /**

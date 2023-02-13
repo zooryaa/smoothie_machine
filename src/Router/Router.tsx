@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LoginPage from '../components/pages/LoginPage/LoginPage';
-import ActiveUserContext from '../Contexts/ActiveUserContext';
 import PrivateRoute from './PrivateRoute';
 import HomePage from '../components/pages/HomePage';
 

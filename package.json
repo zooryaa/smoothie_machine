@@ -9,6 +9,7 @@
     "@mui/joy": "^5.0.0-alpha.47",
     "@mui/material": "^5.10.7",
     "@mui/styles": "^5.10.7",
+    "@mui/x-data-grid": "^5.17.23",
     "@types/jest": "^27.5.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^16.11.62",

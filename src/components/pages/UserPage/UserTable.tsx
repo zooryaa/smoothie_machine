@@ -1,20 +1,12 @@
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import {
-  JSXElementConstructor,
-  ReactElement,
-  ReactFragment,
-  ReactPortal,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { User } from "../../../types/models/User.model";
 import UserService from "../../../Services/UserService";
 import { CardActionArea } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const CardContentFromDatabase = (user: User) => {
   return (
@@ -27,6 +19,7 @@ const CardContentFromDatabase = (user: User) => {
 };
 
 const UserTable = () => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
@@ -35,11 +28,15 @@ const UserTable = () => {
     });
   }, []);
 
-  const handleAdd = (event: React.MouseEvent<HTMLElement>) => {};
+  const handleAdd = () => {
+    navigate("../useredit/");
+  };
 
-  const handleEdit = (event: React.MouseEvent<HTMLElement>) => {};
+  const handleEdit = () => {
+    //navigate("../useredit/" + params.row.id)
+  };
 
-  const handleDelete = (event: React.MouseEvent<HTMLElement>) => {};
+  const handleDelete = () => {};
 
   return (
     <>
@@ -70,15 +67,15 @@ const UserTable = () => {
               </>
             ))}
           </CardContent>
-          <Button
-            size="small"
-            color="success"
-            variant="contained"
-            onClick={handleAdd}
-          >
-            Add
-          </Button>
         </CardActionArea>
+        <Button
+          size="small"
+          color="success"
+          variant="contained"
+          onClick={handleAdd}
+        >
+          Add
+        </Button>
       </Card>
     </>
   );

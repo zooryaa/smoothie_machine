@@ -2,7 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "../components/pages/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import HomePage from "../components/pages/HomePage";
-import UserPage from "../components/pages/UserPage/UserTable";
+import UserTable from "../components/pages/UserPage/UserTable";
+import UserPage from "../components/pages/UserPage/UserPage";
 
 /**
  * Router component renders a route switch with all available pages
@@ -20,15 +21,18 @@ const Router = () => {
 
       <Route
         path={"/users"}
-        element={<PrivateRoute authorities={[]} element={<UserPage />} />}
+        element={<PrivateRoute authorities={[]} element={<UserTable />} />}
       />
       <Route
-        path="/users/:userId"
+        path="/useredit"
         element={
-          <PrivateRoute
-            authorities={[]}
-            element={<div>nothing here</div>}
-          ></PrivateRoute>
+          <PrivateRoute authorities={[]} element={<UserPage />}></PrivateRoute>
+        }
+      />
+      <Route
+        path="/useredit/:userId"
+        element={
+          <PrivateRoute authorities={[]} element={<UserPage />}></PrivateRoute>
         }
       />
 

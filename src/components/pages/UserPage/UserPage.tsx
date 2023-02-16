@@ -1,13 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { User } from "../../../types/models/User.model";
 import UserService from "../../../Services/UserService";
-import { FormikErrors } from "formik";
 import UserForm from "../../molecules/UserForm/UserForm";
 import { useEffect, useState } from "react";
 
 const UserPage = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { userId } = useParams();
   const [user, setUser] = useState<User>({
     id: "",
     firstName: "",
@@ -18,20 +17,27 @@ const UserPage = () => {
 
   useEffect(() => {
     return () => {
-      if (id) {
-        UserService.getUserByID(id).then((res) => {
+      console.log(userId);
+      if (userId) {
+        console.log("hi");
+        UserService.getUserByID(userId).then((res) => {
+          console.log(res, "res");
           return setUser(res);
         });
       }
+      console.log("uhm");
     };
-  }, [id]);
+  }, [userId]);
 
   const submitActionHandler = (values: User) => {
-    if (id !== undefined) {
+    if (userId !== undefined) {
+      console.log("aaa");
       UserService.updateUser(values).then(() => {
         navigate("../users/");
       });
     } else {
+      console.log("bbb");
+      console.log(values);
       UserService.addUser(values).then(() => {
         navigate("/users");
       });

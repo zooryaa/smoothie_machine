@@ -32,11 +32,14 @@ const UserTable = () => {
     navigate("../useredit/");
   };
 
-  const handleEdit = () => {
-    //navigate("../useredit/" + params.row.id)
+  const handleEdit = (id: string) => {
+    navigate("../useredit/" + id);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = (id: string) => {
+    console.log(id);
+    UserService.deleteUser(id);
+  };
 
   return (
     <>
@@ -51,7 +54,7 @@ const UserTable = () => {
                     size="small"
                     color="primary"
                     variant="contained"
-                    onClick={handleEdit}
+                    onClick={() => handleEdit(user.id)}
                   >
                     Edit
                   </Button>
@@ -59,7 +62,7 @@ const UserTable = () => {
                     size="small"
                     color="error"
                     variant="contained"
-                    onClick={handleDelete}
+                    onClick={() => handleDelete(user.id)}
                   >
                     Delete
                   </Button>

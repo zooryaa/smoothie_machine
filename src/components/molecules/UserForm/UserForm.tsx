@@ -1,4 +1,4 @@
-import { FormikErrors, useFormik } from "formik";
+import { useFormik } from "formik";
 import { User } from "../../../types/models/User.model";
 import { Box, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ interface UserProps {
 }
 
 const UserForm = ({ user, submitActionHandler }: UserProps) => {
+  console.log(user);
   const navigate = useNavigate();
   const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -44,6 +45,7 @@ const UserForm = ({ user, submitActionHandler }: UserProps) => {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+            value={formik.values.firstName}
           />
           {formik.errors.firstName && formik.touched.firstName ? (
             <div style={{ color: "red" }}>{formik.errors.firstName}</div>
@@ -56,6 +58,7 @@ const UserForm = ({ user, submitActionHandler }: UserProps) => {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+            value={formik.values.lastName}
           />
           {formik.errors.lastName && formik.touched.lastName ? (
             <div style={{ color: "red" }}>{formik.errors.lastName}</div>
@@ -67,6 +70,7 @@ const UserForm = ({ user, submitActionHandler }: UserProps) => {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={Boolean(formik.touched.email && formik.errors.email)}
+            value={formik.values.email}
           />
 
           {formik.errors.email && formik.touched.email ? (

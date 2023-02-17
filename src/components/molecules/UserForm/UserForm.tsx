@@ -10,7 +10,6 @@ interface UserProps {
 }
 
 const UserForm = ({ user, submitActionHandler }: UserProps) => {
-  console.log(user);
   const navigate = useNavigate();
   const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

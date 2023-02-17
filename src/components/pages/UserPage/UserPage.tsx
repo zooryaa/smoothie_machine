@@ -17,27 +17,20 @@ const UserPage = () => {
 
   useEffect(() => {
     return () => {
-      console.log(userId);
       if (userId) {
-        console.log("hi");
-        UserService.getUserByID(userId).then((res) => {
-          console.log(res, "res");
+        UserService.getUser(userId).then((res) => {
           return setUser(res);
         });
       }
-      console.log("uhm");
     };
   }, [userId]);
 
   const submitActionHandler = (values: User) => {
     if (userId !== undefined) {
-      console.log("aaa");
       UserService.updateUser(values).then(() => {
         navigate("../users/");
       });
     } else {
-      console.log("bbb");
-      console.log(values);
       UserService.addUser(values).then(() => {
         navigate("/users");
       });

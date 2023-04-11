@@ -4,7 +4,6 @@ import * as jwt from 'jsonwebtoken';
 import ActiveUserContext from '../Contexts/ActiveUserContext';
 import AuthorityService from '../Services/AuthorityService';
 import { Authority } from '../types/models/Authority.model';
-import { Button } from '@mui/material';
 
 interface Props {
   element: React.ReactElement;
@@ -18,7 +17,7 @@ type JWTType = {
 
 const PrivateRoute: React.FC<Props> = ({
   element: RouteComponent,
-  authorities,
+  authorities: authorities,
 }) => {
   const activeUserContext = useContext(ActiveUserContext);
   /**
@@ -65,11 +64,8 @@ const PrivateRoute: React.FC<Props> = ({
 
   // All checks passed
   return (
-    //Pagelayout puts the Navigation, Menu etc. around the component
-    <div>
-      <Button onClick={activeUserContext.logout}>Logout</Button>
-      {RouteComponent}
-    </div>
+    // Pagelayout puts the Navigation, Menu etc. around the component
+    RouteComponent
   );
 };
 export default PrivateRoute;

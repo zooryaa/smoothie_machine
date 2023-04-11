@@ -1,21 +1,16 @@
-import { Box, flexbox } from '@mui/system';
+import React from 'react';
 import logo from '../../logo1.png';
 
 export default function HomePage() {
   return (
-    <Box
-      display='flex'
-      alignItems='center'
-      justifyContent='center'
-      flexDirection={'column'}
-    >
-      <h1>Welcome to the Homepage</h1>
+    <div>
       <img
         src={logo}
         style={{ filter: 'invert(100%)' }}
         className='App-logo'
         alt='logo'
       />
-    </Box>
+      <p>PlaceHolder</p>
+    </div>
   );
 }

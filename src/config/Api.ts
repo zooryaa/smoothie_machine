@@ -4,7 +4,7 @@ import axios, { AxiosInstance } from 'axios';
  * isDev returns a boolean if the application is running in development-mode.
  */
 const isDev = (): boolean =>
-  !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+  !true || false;
 
 /**
  * Create an Axios instance for the api.

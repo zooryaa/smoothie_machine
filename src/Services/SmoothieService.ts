@@ -2,15 +2,17 @@ import React from 'react'
 import api from '../config/Api';
 
 const SmoothieService = {
-  addFruit: (fruit: String) => {
-    return api.post('/fruit', fruit).then((res) => {
-      return res.data;
-    });
-  },
+  start: (processID: string) => api.post(`process-definition/key/${processID}/start`, {}),
 
   getAllFruits: () => {
     return api.get(`/fruitStock`);
   },
+
+  completeStart: (taskID: string) => {
+    api.post(`task/${taskID}/complete`, {})
+  },
+
+  getValues: (processID: string) => api.get(`/task?processDefinitionKey=${processID}`)
 };
 
 export default SmoothieService
